@@ -11,7 +11,7 @@ Sub UpdateDataAnalisisC()
     Set wsTarget = ActiveSheet
     
     searchCrit = wsTarget.Range("B24").Value
-    
+
     Application.ScreenUpdating = False
     Application.EnableEvents = False
     
@@ -28,17 +28,18 @@ Sub UpdateDataAnalisisC()
     If lastRow < 25 Then lastRow = 25
     
     wsTarget.Range("B26:N" & lastRow + 100).ClearContents
-    
+
     If searchCrit = "" Then GoTo ExitSub
-    
+
     If isFraudActive Then
         formulaStr = "IFERROR(SORT(FILTER(Source!A:M, ISNUMBER(SEARCH(""" & searchCrit & """, Source!A:A)), ""Data Tidak Ditemukan""), {10,2,9}, 1), ""Data Tidak Ditemukan"")"
     Else
         formulaStr = "IFERROR(SORT(FILTER(Source!A:M, (ISNUMBER(SEARCH(""" & searchCrit & """, Source!A:A))) * (ISERROR(SEARCH(""FRAUD"", Source!K:K))), ""Data Tidak Ditemukan""), {10,2,9}, 1), ""Data Tidak Ditemukan"")"
     End If
-    
+
     With wsTarget.Range("B26")
         .Formula2 = "=" & formulaStr
+        
         DoEvents
         
         On Error Resume Next
