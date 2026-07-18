@@ -15,7 +15,7 @@ if not os.path.exists(file_path):
 
 def load_dataset(path):
     try:
-        return pd.read_excel(path, header=4)
+        return pd.read_excel(path, header=5)
     except:
         return None
 
@@ -25,7 +25,7 @@ if df is None:
     print(f"Gagal membaca file {file_path}.")
     exit()
 
-target_indices = [2, 5, 6, 7, 8, 9, 10, 4, 1, 3]
+target_indices = [3, 9, 11, 13, 15, 17, 19, 7, 1, 5]
 df_clean = df.iloc[:, target_indices].copy()
 
 new_columns = [
